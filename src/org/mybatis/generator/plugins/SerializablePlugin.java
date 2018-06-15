@@ -18,6 +18,7 @@ package org.mybatis.generator.plugins;
 import java.time.Instant;
 import java.util.List;
 import java.util.Properties;
+import java.io.ObjectStreamClass;
 
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -99,7 +100,7 @@ public class SerializablePlugin extends PluginAdapter {
 
             Field field = new Field();
             field.setFinal(true);
-            field.setInitializationString(topLevelClass.hashCode() * Instant.now().getEpochSecond() + "L"); //$NON-NLS-1$
+            field.setInitializationString(ObjectStreamClass.lookup(topLevelClass).getSerialVersionUID() + "L"); //$NON-NLS-1$
             field.setName("serialVersionUID"); //$NON-NLS-1$
             field.setStatic(true);
             field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
