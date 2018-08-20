@@ -1,5 +1,6 @@
 package org.mybatis.generator.internal.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.generator.api.Plugin;
@@ -25,6 +26,6 @@ public class SetIgnoreUtil {
         	}
         	iicList = iicp.getInsertIgnoreColumns();
         }
-        return iicList;
+        return iicList == null? new ArrayList<>() : iicList;
 	}
 }
