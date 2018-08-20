@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Core
-Bundle-SymbolicName: org.mybatis.generate.core
+Bundle-SymbolicName: org.mybatis.generator.core
 Bundle-Version: 1.3.6.201712211716
 Bundle-ClassPath: .
 Bundle-Vendor: Ryuhi
@@ -47,4 +47,4 @@ Export-Package: org.mybatis.generator.ant,
  org.mybatis.generator.runtime.dynamic.sql,
  org.mybatis.generator.runtime.dynamic.sql.elements
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Automatic-Module-Name: org.mybatis.generate.core
+Automatic-Module-Name: org.mybatis.generator.core
