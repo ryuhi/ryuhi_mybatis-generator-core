@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"   
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-	<classPathEntry location="D:\download\mysql-connector-java-5.1.40.jar" />
+	<classPathEntry location="E:/mysql-connector-java-5.1.46.jar" />
 	<context id="MysqlTables"  defaultModelType="flat" >
 	
 	    <property name="javaFileEncoding" value="UTF-8"/>
@@ -11,12 +11,10 @@
 	    <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
 	    <property name="beginningDelimiter" value="`" />
 	    <property name="endingDelimiter" value="`" />
-    	<!-- entity类实现序列化接口 -->
-		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<!-- 设置全局insert、update不需要操作的字段，property的name为不需要操作的字段名，value固定为true -->
 		<plugin type="org.mybatis.generator.plugins.InsertIgnoreColumnPlugin" >
-				<property name="gmt_create" value="true"/>
-				<property name="gmt_modified" value="true"/>
+<!-- 				<property name="gmt_create" value="true"/> -->
+<!-- 				<property name="gmt_modified" value="true"/> -->
 		</plugin>
 		<!-- 接入Lombok，property的name为注解名称，value固定为true -->
 		<plugin type="org.mybatis.generator.plugins.LombokPlugin">
@@ -24,6 +22,8 @@
              <property name="allArgsConstructor" value="true"/>
              <property name="noArgsConstructor" value="true"/>
         </plugin>
+		<!-- entity类实现序列化接口 -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<commentGenerator>
 			<property name="suppressDate" value="true" />
 			<property name="suppressAllComments" value="true" />
@@ -57,6 +57,6 @@
 		</javaClientGenerator>
 		<!-- delimitAllColumns表示给所有字段加反引号，当字段名为保留字关键字时，这个非常有用，所以一定要开启 -->
 		<!-- delimitIdentifiers表示使用全局定义的 beginningDelimiter和endingDelimiter，这样不用每个表都写一遍-->
-		<table tableName="coupon_draw" domainObjectName="CouponDrawEntity"  delimitAllColumns="true" delimitIdentifiers="true"  />
+		<table tableName="xxx" domainObjectName="XxxEntity"  delimitAllColumns="true" delimitIdentifiers="true"  />
 	</context>
 </generatorConfiguration>
