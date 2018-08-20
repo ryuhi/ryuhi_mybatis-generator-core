@@ -15,7 +15,6 @@
  */
 package org.mybatis.generator.plugins;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.Properties;
 import java.io.ObjectStreamClass;
@@ -24,8 +23,10 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
+import org.mybatis.generator.api.dom.java.InnerClass;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.TypeParameter;
 
 /**
  * This plugin adds the java.io.Serializable marker interface to all generated
@@ -88,7 +89,7 @@ public class SerializablePlugin extends PluginAdapter {
     }
 
     protected void makeSerializable(TopLevelClass topLevelClass,
-            IntrospectedTable introspectedTable) {
+            IntrospectedTable introspectedTable)  {
         if (addGWTInterface) {
             topLevelClass.addImportedType(gwtSerializable);
             topLevelClass.addSuperInterface(gwtSerializable);
@@ -100,7 +101,7 @@ public class SerializablePlugin extends PluginAdapter {
 
             Field field = new Field();
             field.setFinal(true);
-            field.setInitializationString(ObjectStreamClass.lookup(topLevelClass).getSerialVersionUID() + "L"); //$NON-NLS-1$
+			field.setInitializationString("1L");
             field.setName("serialVersionUID"); //$NON-NLS-1$
             field.setStatic(true);
             field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
