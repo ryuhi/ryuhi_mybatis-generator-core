@@ -15,18 +15,21 @@
  */
 package org.mybatis.generator.plugins;
 
-import java.util.List;
-import java.util.Properties;
+import java.io.IOException;
 import java.io.ObjectStreamClass;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
+import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.InnerClass;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.api.dom.java.TypeParameter;
+
+import com.itranswarp.compiler.JavaStringCompiler;
 
 /**
  * This plugin adds the java.io.Serializable marker interface to all generated
@@ -101,13 +104,25 @@ public class SerializablePlugin extends PluginAdapter {
 
             Field field = new Field();
             field.setFinal(true);
-			field.setInitializationString("1L");
+            String code = topLevelClass.getFormattedContent();
+            long svuid = 1L;
+        	JavaStringCompiler compiler = new JavaStringCompiler();
+        	String shortName = topLevelClass.getType().getShortName()+".java";
+        	String packageName = topLevelClass.getType().getFullyQualifiedName();
+            Map<String, byte[]> results;
+			try {
+				results = compiler.compile(shortName, code);
+				Class<?> clazz = compiler.loadClass(packageName, results);
+				svuid = ObjectStreamClass.lookup(clazz).getSerialVersionUID();
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			field.setInitializationString(svuid+"L"); //$NON-NLS-1$ 
             field.setName("serialVersionUID"); //$NON-NLS-1$
             field.setStatic(true);
             field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
             field.setVisibility(JavaVisibility.PRIVATE);
             context.getCommentGenerator().addFieldComment(field, introspectedTable);
-
             topLevelClass.addField(field);
         }
     }
