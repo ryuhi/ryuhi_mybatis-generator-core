@@ -36,6 +36,8 @@
 		
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="true"/>
+			<!-- 选择使用原生类型，需要才选择添加这个参数，值设置为true，否则不添加 -->
+			<property name="usePrimitive" value="true"/>
 		</javaTypeResolver>
 
 		<javaModelGenerator targetPackage="xxx.dao.model"
