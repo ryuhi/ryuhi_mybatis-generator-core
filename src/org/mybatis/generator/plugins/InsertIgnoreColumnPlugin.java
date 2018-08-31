@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -41,7 +42,7 @@ public class InsertIgnoreColumnPlugin extends PluginAdapter {
     	beginningDelimiter = context.getBeginningDelimiter();
     	endingDelimiter = context.getEndingDelimiter();
     	List<IntrospectedColumn> list = introspectedTable.getAllColumns();
-    	List<IntrospectedColumn> newList = Collections.synchronizedList(list);
+    	List<IntrospectedColumn> newList = new CopyOnWriteArrayList<>(list);
     	for (IntrospectedColumn ic : list) {
     		if (this.properties.containsKey(ic.getActualColumnName())) {
     			newList.remove(ic);
