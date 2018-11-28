@@ -15,6 +15,8 @@
  */
 package org.mybatis.generator.api.dom.java;
 
+import org.mybatis.generator.util.Constant;
+
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
@@ -333,8 +335,7 @@ public class FullyQualifiedJavaType implements
 
     public static final FullyQualifiedJavaType getGeneratedCriteriaInstance() {
         if (generatedCriteriaInstance == null) {
-            generatedCriteriaInstance = new FullyQualifiedJavaType(
-                    "AbstractGeneratedCriteria"); //$NON-NLS-1$
+            generatedCriteriaInstance = new FullyQualifiedJavaType(Constant.CRITERIA_NAME); //$NON-NLS-1$
         }
 
         return generatedCriteriaInstance;

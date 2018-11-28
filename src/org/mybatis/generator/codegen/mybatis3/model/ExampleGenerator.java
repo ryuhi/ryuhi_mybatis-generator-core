@@ -37,6 +37,7 @@ import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
+import org.mybatis.generator.util.Constant;
 
 /**
  * 
@@ -388,7 +389,7 @@ public class ExampleGenerator extends AbstractJavaGenerator {
 
         Method method = new Method();
         method.setVisibility(JavaVisibility.PROTECTED);
-        method.setName("AbstractGeneratedCriteria"); //$NON-NLS-1$
+        method.setName(Constant.CRITERIA_NAME); //$NON-NLS-1$
         method.setConstructor(true);
         method.addBodyLine("super();"); //$NON-NLS-1$
         method.addBodyLine("criteria = new ArrayList<Criterion>();"); //$NON-NLS-1$

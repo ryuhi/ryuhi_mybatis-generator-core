@@ -27,6 +27,7 @@ import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.codegen.ibatis2.Ibatis2FormattingUtilities;
+import org.mybatis.generator.util.Constant;
 
 /**
  * This plugin demonstrates adding methods to the example class to enable
@@ -57,7 +58,7 @@ public class CaseInsensitiveLikePlugin extends PluginAdapter {
         InnerClass criteria = null;
         // first, find the Criteria inner class
         for (InnerClass innerClass : topLevelClass.getInnerClasses()) {
-            if ("AbstractGeneratedCriteria".equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
+            if (Constant.CRITERIA_NAME.equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
                 criteria = innerClass;
                 break;
             }

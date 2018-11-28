@@ -38,6 +38,7 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.ibatis2.Ibatis2FormattingUtilities;
 import org.mybatis.generator.internal.rules.Rules;
+import org.mybatis.generator.util.Constant;
 
 /**
  * Generates the example class for iBatis2.
@@ -273,7 +274,7 @@ public class ExampleGenerator extends AbstractJavaGenerator {
 
         Method method = new Method();
         method.setVisibility(JavaVisibility.PROTECTED);
-        method.setName("AbstractGeneratedCriteria"); //$NON-NLS-1$
+        method.setName(Constant.CRITERIA_NAME); //$NON-NLS-1$
         method.setConstructor(true);
         method.addBodyLine("super();"); //$NON-NLS-1$
         if (generateForJava5) {
