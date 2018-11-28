@@ -57,7 +57,7 @@ public class CaseInsensitiveLikePlugin extends PluginAdapter {
         InnerClass criteria = null;
         // first, find the Criteria inner class
         for (InnerClass innerClass : topLevelClass.getInnerClasses()) {
-            if ("GeneratedCriteria".equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
+            if ("AbstractGeneratedCriteria".equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
                 criteria = innerClass;
                 break;
             }

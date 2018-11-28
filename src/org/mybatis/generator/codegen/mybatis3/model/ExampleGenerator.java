@@ -388,7 +388,7 @@ public class ExampleGenerator extends AbstractJavaGenerator {
 
         Method method = new Method();
         method.setVisibility(JavaVisibility.PROTECTED);
-        method.setName("GeneratedCriteria"); //$NON-NLS-1$
+        method.setName("AbstractGeneratedCriteria"); //$NON-NLS-1$
         method.setConstructor(true);
         method.addBodyLine("super();"); //$NON-NLS-1$
         method.addBodyLine("criteria = new ArrayList<Criterion>();"); //$NON-NLS-1$
