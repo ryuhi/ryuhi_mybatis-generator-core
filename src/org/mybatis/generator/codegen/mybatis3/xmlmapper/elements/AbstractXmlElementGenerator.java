@@ -16,11 +16,17 @@
 package org.mybatis.generator.codegen.mybatis3.xmlmapper.elements;
 
 import org.mybatis.generator.api.IntrospectedColumn;
+import org.mybatis.generator.api.JavaTypeResolver;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.AbstractGenerator;
 import org.mybatis.generator.config.GeneratedKey;
+import org.mybatis.generator.config.PropertyRegistry;
+import org.mybatis.generator.internal.ObjectFactory;
+import org.mybatis.generator.internal.util.StringUtility;
+
+import java.util.List;
 
 /**
  * 
@@ -98,5 +104,31 @@ public abstract class AbstractXmlElementGenerator extends AbstractGenerator {
         ifElement.addElement(includeElement);
 
         return ifElement;
+    }
+
+    /**
+     *  判断是否使用了使用基本类型的配置属性
+     * @return 布尔值
+     */
+    protected boolean isPrimitive() {
+
+        return this.getContext().isUsePrimitive();
+    }
+
+    /**
+     *  根据是否使用基本类型的配置属性，输出更新语句判断为空的条件
+     * @param introspectedColumn
+     * @return 输出条件，字符串
+     */
+    protected String getCheckPrimitiveString(IntrospectedColumn introspectedColumn) {
+        boolean isNull = introspectedColumn.isNullable();
+        boolean isNumeric = introspectedColumn.isJdbcNumericColumn();
+        String result = null;
+        if (isPrimitive()) {
+            if (!isNull && isNumeric) {
+                return " != 0";
+            }
+        }
+        return " != null";
     }
 }

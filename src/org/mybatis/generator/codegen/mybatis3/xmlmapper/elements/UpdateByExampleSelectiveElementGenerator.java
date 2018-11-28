@@ -61,7 +61,7 @@ public class UpdateByExampleSelectiveElementGenerator extends
                 .getAllColumns(), iicList)) {
             sb.setLength(0);
             sb.append(introspectedColumn.getJavaProperty("record.")); //$NON-NLS-1$
-            sb.append(" != null"); //$NON-NLS-1$
+            sb.append(getCheckPrimitiveString(introspectedColumn));
             XmlElement isNotNullElement = new XmlElement("if"); //$NON-NLS-1$
             isNotNullElement.addAttribute(new Attribute("test", sb.toString())); //$NON-NLS-1$
             dynamicElement.addElement(isNotNullElement);

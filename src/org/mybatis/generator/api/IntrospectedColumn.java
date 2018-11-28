@@ -340,4 +340,18 @@ public class IntrospectedColumn {
     public void setGeneratedAlways(boolean isGeneratedAlways) {
         this.isGeneratedAlways = isGeneratedAlways;
     }
+
+    /**
+     *  是否是数据库的数字字段
+     * @return 布尔值
+     */
+    public boolean isJdbcNumericColumn() {
+        boolean isMedium = "MEDIUMINT".equalsIgnoreCase(jdbcTypeName);
+        return jdbcType == Types.BIGINT || jdbcType == Types.DOUBLE
+                || jdbcType == Types.FLOAT || jdbcType == Types.INTEGER
+                || jdbcType == Types.REAL || jdbcType == Types.SMALLINT
+                || jdbcType == Types.TINYINT || jdbcType == Types.DECIMAL
+                || jdbcType == Types.NUMERIC || isMedium;
+    }
+
 }

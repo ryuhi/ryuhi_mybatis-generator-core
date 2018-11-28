@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import lombok.Getter;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.JavaTypeResolver;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
@@ -46,7 +47,7 @@ public class JavaTypeResolverDefaultImpl implements JavaTypeResolver {
     protected Context context;
 
     protected boolean forceBigDecimals;
-    
+    @Getter
     protected boolean usePrimitive;
 
     protected Map<Integer, JdbcTypeInformation> typeMap;

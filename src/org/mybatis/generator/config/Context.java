@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.ConnectionFactory;
 import org.mybatis.generator.api.GeneratedJavaFile;
@@ -108,6 +110,12 @@ public class Context extends PropertyHolder {
 
     /** The xml formatter. */
     private XmlFormatter xmlFormatter;
+
+    /**
+     * 是否使用基本数据类型
+     */
+    @Getter @Setter
+    private boolean usePrimitive;
     
     /**
      * Constructs a Context object.
@@ -452,6 +460,8 @@ public class Context extends PropertyHolder {
                 && stringHasValue(value)) {
             autoDelimitKeywords = isTrue(value);
         }
+
+        privateAddNewProperty(name, value);
     }
 
     /**
@@ -785,5 +795,13 @@ public class Context extends PropertyHolder {
 
     public void setConnectionFactoryConfiguration(ConnectionFactoryConfiguration connectionFactoryConfiguration) {
         this.connectionFactoryConfiguration = connectionFactoryConfiguration;
+    }
+
+
+    private void privateAddNewProperty(String name, String value) {
+
+        if (PropertyRegistry.USE_PRIMITIVE.equals(name)) {
+            usePrimitive = Boolean.valueOf(value);
+        }
     }
 }
