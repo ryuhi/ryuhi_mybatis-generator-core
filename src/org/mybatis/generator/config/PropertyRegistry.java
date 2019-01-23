@@ -70,4 +70,6 @@ public class PropertyRegistry {
     public static final String COMMENT_GENERATOR_DATE_FORMAT = "dateFormat"; //$NON-NLS-1$
     
     public static final String USE_PRIMITIVE = "usePrimitive";
+
+    public static final String AUTHOR_NAME = "authorName";
 }
