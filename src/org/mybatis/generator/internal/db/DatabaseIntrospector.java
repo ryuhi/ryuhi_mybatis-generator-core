@@ -54,9 +54,6 @@ import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.logging.Log;
 import org.mybatis.generator.logging.LogFactory;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * @author Jeff Butler
  */

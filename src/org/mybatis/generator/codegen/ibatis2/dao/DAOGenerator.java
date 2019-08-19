@@ -71,12 +71,12 @@ public class DAOGenerator extends AbstractJavaClientGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits() {
+    public List<CompilationUnit> getCompilationUnits(String author) {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString(
                 "Progress.14", table.toString())); //$NON-NLS-1$
-        TopLevelClass topLevelClass = getTopLevelClassShell();
-        Interface interfaze = getInterfaceShell();
+        TopLevelClass topLevelClass = getTopLevelClassShell(author);
+        Interface interfaze = getInterfaceShell(author);
 
         addCountByExampleMethod(topLevelClass, interfaze);
         addDeleteByExampleMethod(topLevelClass, interfaze);
@@ -104,7 +104,7 @@ public class DAOGenerator extends AbstractJavaClientGenerator {
         return answer;
     }
 
-    protected TopLevelClass getTopLevelClassShell() {
+    protected TopLevelClass getTopLevelClassShell(String author) {
         FullyQualifiedJavaType interfaceType = new FullyQualifiedJavaType(
                 introspectedTable.getDAOInterfaceType());
         FullyQualifiedJavaType implementationType = new FullyQualifiedJavaType(
@@ -124,7 +124,7 @@ public class DAOGenerator extends AbstractJavaClientGenerator {
         }
 
         CommentGenerator commentGenerator = context.getCommentGenerator();
-        commentGenerator.addJavaFileComment(answer);
+        commentGenerator.addJavaFileComment(answer, author);
 
         // add constructor from the template
         answer.addMethod(daoTemplate.getConstructorClone(commentGenerator,
@@ -145,7 +145,7 @@ public class DAOGenerator extends AbstractJavaClientGenerator {
         return answer;
     }
 
-    protected Interface getInterfaceShell() {
+    protected Interface getInterfaceShell(String author) {
         Interface answer = new Interface(new FullyQualifiedJavaType(
                 introspectedTable.getDAOInterfaceType()));
         answer.setVisibility(JavaVisibility.PUBLIC);
@@ -168,7 +168,7 @@ public class DAOGenerator extends AbstractJavaClientGenerator {
             answer.addImportedType(fqjt);
         }
 
-        context.getCommentGenerator().addJavaFileComment(answer);
+        context.getCommentGenerator().addJavaFileComment(answer, author);
 
         return answer;
     }
@@ -340,7 +340,7 @@ public class DAOGenerator extends AbstractJavaClientGenerator {
     }
 
     @Override
-    public AbstractXmlGenerator getMatchedXMLGenerator() {
+    public AbstractXmlGenerator getMatchedXMLGenerator(String author) {
         // this method is not called for iBATIS2
         return null;
     }

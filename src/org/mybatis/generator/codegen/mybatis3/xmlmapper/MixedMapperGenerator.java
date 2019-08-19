@@ -17,12 +17,19 @@ package org.mybatis.generator.codegen.mybatis3.xmlmapper;
 
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
+import lombok.NoArgsConstructor;
+
 /**
  * 
  * @author Jeff Butler
  *
  */
+@NoArgsConstructor
 public class MixedMapperGenerator extends XMLMapperGenerator {
+	
+	public MixedMapperGenerator(String author) {
+		
+	}
 
     @Override
     protected void addSelectByPrimaryKeyElement(XmlElement parentElement) {

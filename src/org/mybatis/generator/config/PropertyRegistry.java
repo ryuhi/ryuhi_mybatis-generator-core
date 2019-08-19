@@ -74,4 +74,6 @@ public class PropertyRegistry {
     public static final String AUTHOR_NAME = "authorName";
     
     public static final String USE_TEXT_AS_NO_BLOB  = "useTextAsNoBlob";
+    
+    public static final String AUTHOR  = "author";
 }

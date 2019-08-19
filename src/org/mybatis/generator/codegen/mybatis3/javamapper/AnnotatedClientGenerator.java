@@ -163,7 +163,7 @@ public class AnnotatedClientGenerator extends JavaMapperGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getExtraCompilationUnits() {
+    public List<CompilationUnit> getExtraCompilationUnits(String author) {
         boolean useLegacyBuilder = false;
 
         String prop = context.getJavaClientGeneratorConfiguration()
@@ -176,11 +176,11 @@ public class AnnotatedClientGenerator extends JavaMapperGenerator {
         sqlProviderGenerator.setIntrospectedTable(introspectedTable);
         sqlProviderGenerator.setProgressCallback(progressCallback);
         sqlProviderGenerator.setWarnings(warnings);
-        return sqlProviderGenerator.getCompilationUnits();
+        return sqlProviderGenerator.getCompilationUnits(author);
     }
 
     @Override
-    public AbstractXmlGenerator getMatchedXMLGenerator() {
+    public AbstractXmlGenerator getMatchedXMLGenerator(String author) {
         // No XML required by the annotated client
         return null;
     }

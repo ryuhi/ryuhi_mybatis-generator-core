@@ -39,13 +39,13 @@ public class IntrospectedTableMyBatis3SimpleImpl extends IntrospectedTableMyBati
     @Override
     protected void calculateXmlMapperGenerator(AbstractJavaClientGenerator javaClientGenerator, 
             List<String> warnings,
-            ProgressCallback progressCallback) {
+            ProgressCallback progressCallback, String author) {
         if (javaClientGenerator == null) {
             if (context.getSqlMapGeneratorConfiguration() != null) {
                 xmlMapperGenerator = new SimpleXMLMapperGenerator();
             }
         } else {
-            xmlMapperGenerator = javaClientGenerator.getMatchedXMLGenerator();
+            xmlMapperGenerator = javaClientGenerator.getMatchedXMLGenerator(author);
         }
         
         initializeAbstractGenerator(xmlMapperGenerator, warnings,

@@ -41,6 +41,10 @@ public class SimpleXMLMapperGenerator extends AbstractXmlGenerator {
     public SimpleXMLMapperGenerator() {
         super();
     }
+    
+    public SimpleXMLMapperGenerator(String author) {
+        super();
+    }
 
     protected XmlElement getSqlMapElement() {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();

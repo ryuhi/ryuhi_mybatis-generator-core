@@ -49,7 +49,7 @@ public class SimpleModelGenerator extends AbstractJavaGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits() {
+    public List<CompilationUnit> getCompilationUnits(String author) {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString("Progress.8", table.toString())); //$NON-NLS-1$
         Plugin plugins = context.getPlugins();
@@ -59,7 +59,7 @@ public class SimpleModelGenerator extends AbstractJavaGenerator {
                 introspectedTable.getBaseRecordType());
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(topLevelClass);
+        commentGenerator.addJavaFileComment(topLevelClass, author);
 
         FullyQualifiedJavaType superClass = getSuperClass();
         if (superClass != null) {

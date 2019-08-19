@@ -62,12 +62,12 @@ public class DefaultCommentGenerator implements CommentGenerator {
     }
 
     @Override
-    public void addJavaFileComment(CompilationUnit compilationUnit) {
+    public void addJavaFileComment(CompilationUnit compilationUnit, String author) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ");
         compilationUnit.addFileCommentLine("/**");
         compilationUnit.addFileCommentLine("  * " + compilationUnit.getType().getFullyQualifiedName() + ".java");
         compilationUnit.addFileCommentLine("  * ");
-        compilationUnit.addFileCommentLine("  * @author " + authorName);
+        compilationUnit.addFileCommentLine("  * @author " + author);
         compilationUnit.addFileCommentLine("  * @date " + LocalDateTime.now().format(formatter));
         compilationUnit.addFileCommentLine("  */");
     }

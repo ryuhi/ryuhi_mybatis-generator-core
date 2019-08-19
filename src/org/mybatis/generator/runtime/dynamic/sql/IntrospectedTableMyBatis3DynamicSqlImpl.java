@@ -35,7 +35,7 @@ public class IntrospectedTableMyBatis3DynamicSqlImpl extends IntrospectedTableMy
     @Override
     protected void calculateXmlMapperGenerator(AbstractJavaClientGenerator javaClientGenerator, 
             List<String> warnings,
-            ProgressCallback progressCallback) {
+            ProgressCallback progressCallback, String author) {
         // no XML with dynamic SQL support
         xmlMapperGenerator = null;
     }

@@ -86,6 +86,9 @@ public class Context extends PropertyHolder {
     
     @Getter
     private Boolean useTextAsNoBlob;
+    
+    @Getter
+    private String author;
 
     /** The comment generator configuration. */
     private CommentGeneratorConfiguration commentGeneratorConfiguration;
@@ -466,6 +469,7 @@ public class Context extends PropertyHolder {
 
         privateAddNewProperty(name, value);
         privateAddUseTextAsNoBlob(name,value);
+        privateAddAuthor(name, value);
     }
 
     /**
@@ -712,7 +716,6 @@ public class Context extends PropertyHolder {
             List<GeneratedJavaFile> generatedJavaFiles,
             List<GeneratedXmlFile> generatedXmlFiles, List<String> warnings)
             throws InterruptedException {
-
         pluginAggregator = new PluginAggregator();
         for (PluginConfiguration pluginConfiguration : pluginConfigurations) {
             Plugin plugin = ObjectFactory.createPlugin(this,
@@ -730,9 +733,9 @@ public class Context extends PropertyHolder {
                 callback.checkCancel();
 
                 introspectedTable.initialize();
-                introspectedTable.calculateGenerators(warnings, callback);
+                introspectedTable.calculateGenerators(warnings, callback, author);
                 generatedJavaFiles.addAll(introspectedTable
-                        .getGeneratedJavaFiles());
+                        .getGeneratedJavaFiles(author));
                 generatedXmlFiles.addAll(introspectedTable
                         .getGeneratedXmlFiles());
 
@@ -809,9 +812,14 @@ public class Context extends PropertyHolder {
         }
     }
     
-    public void privateAddUseTextAsNoBlob(String name, String value) {
+    private void privateAddUseTextAsNoBlob(String name, String value) {
         if (PropertyRegistry.USE_TEXT_AS_NO_BLOB.equals(name)) {
             useTextAsNoBlob = Boolean.valueOf(value);
         }
+    }
+    private void privateAddAuthor(String name, String value) {
+    	if (PropertyRegistry.AUTHOR.equals(name)) {
+    		author = value;
+    	}
     }
 }

@@ -58,24 +58,24 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
 
     @Override
     public void calculateGenerators(List<String> warnings,
-            ProgressCallback progressCallback) {
+            ProgressCallback progressCallback, String author) {
         calculateJavaModelGenerators(warnings, progressCallback);
         
         AbstractJavaClientGenerator javaClientGenerator =
                 calculateClientGenerators(warnings, progressCallback);
             
-        calculateXmlMapperGenerator(javaClientGenerator, warnings, progressCallback);
+        calculateXmlMapperGenerator(javaClientGenerator, warnings, progressCallback, author);
     }
 
     protected void calculateXmlMapperGenerator(AbstractJavaClientGenerator javaClientGenerator, 
             List<String> warnings,
-            ProgressCallback progressCallback) {
+            ProgressCallback progressCallback, String author) {
         if (javaClientGenerator == null) {
             if (context.getSqlMapGeneratorConfiguration() != null) {
                 xmlMapperGenerator = new XMLMapperGenerator();
             }
         } else {
-            xmlMapperGenerator = javaClientGenerator.getMatchedXMLGenerator();
+            xmlMapperGenerator = javaClientGenerator.getMatchedXMLGenerator(author);
         }
         
         initializeAbstractGenerator(xmlMapperGenerator, warnings,
@@ -169,12 +169,12 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
     }
 
     @Override
-    public List<GeneratedJavaFile> getGeneratedJavaFiles() {
+    public List<GeneratedJavaFile> getGeneratedJavaFiles(String author) {
         List<GeneratedJavaFile> answer = new ArrayList<GeneratedJavaFile>();
 
         for (AbstractJavaGenerator javaGenerator : javaModelGenerators) {
             List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits();
+                    .getCompilationUnits(author);
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
                         context.getJavaModelGeneratorConfiguration()
@@ -187,7 +187,7 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
 
         for (AbstractJavaGenerator javaGenerator : clientGenerators) {
             List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits();
+                    .getCompilationUnits(author);
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
                         context.getJavaClientGeneratorConfiguration()

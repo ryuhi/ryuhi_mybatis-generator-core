@@ -59,7 +59,7 @@ public class IntrospectedTableIbatis2Java2Impl extends IntrospectedTable {
 
     @Override
     public void calculateGenerators(List<String> warnings,
-            ProgressCallback progressCallback) {
+            ProgressCallback progressCallback, String author) {
         calculateJavaModelGenerators(warnings, progressCallback);
         calculateDAOGenerators(warnings, progressCallback);
         calculateSqlMapGenerator(warnings, progressCallback);
@@ -144,12 +144,12 @@ public class IntrospectedTableIbatis2Java2Impl extends IntrospectedTable {
     }
 
     @Override
-    public List<GeneratedJavaFile> getGeneratedJavaFiles() {
+    public List<GeneratedJavaFile> getGeneratedJavaFiles(String author) {
         List<GeneratedJavaFile> answer = new ArrayList<GeneratedJavaFile>();
 
         for (AbstractJavaGenerator javaGenerator : javaModelGenerators) {
             List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits();
+                    .getCompilationUnits(author);
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
                         context.getJavaModelGeneratorConfiguration()
@@ -162,7 +162,7 @@ public class IntrospectedTableIbatis2Java2Impl extends IntrospectedTable {
 
         for (AbstractJavaGenerator javaGenerator : daoGenerators) {
             List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits();
+                    .getCompilationUnits(author);
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
                         context.getJavaClientGeneratorConfiguration()

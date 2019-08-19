@@ -53,7 +53,7 @@ public class SqlProviderGenerator extends AbstractJavaGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits() {
+    public List<CompilationUnit> getCompilationUnits(String author) {
         progressCallback.startTask(getString("Progress.18", //$NON-NLS-1$
                 introspectedTable.getFullyQualifiedTable().toString()));
         CommentGenerator commentGenerator = context.getCommentGenerator();
@@ -62,7 +62,7 @@ public class SqlProviderGenerator extends AbstractJavaGenerator {
                 introspectedTable.getMyBatis3SqlProviderType());
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(topLevelClass);
+        commentGenerator.addJavaFileComment(topLevelClass, author);
 
         boolean addApplyWhereMethod = false;
         addApplyWhereMethod |= addCountByExampleMethod(topLevelClass);

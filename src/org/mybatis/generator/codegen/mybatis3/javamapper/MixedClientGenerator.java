@@ -82,7 +82,7 @@ public class MixedClientGenerator extends JavaMapperGenerator {
     }
 
     @Override
-    public AbstractXmlGenerator getMatchedXMLGenerator() {
-        return new MixedMapperGenerator();
+    public AbstractXmlGenerator getMatchedXMLGenerator(String author) {
+        return new MixedMapperGenerator(author);
     }
 }

@@ -989,7 +989,7 @@ public abstract class IntrospectedTable {
      *            the progress callback
      */
     public abstract void calculateGenerators(List<String> warnings,
-            ProgressCallback progressCallback);
+            ProgressCallback progressCallback, String author);
 
     /**
      * This method should return a list of generated Java files related to this
@@ -998,7 +998,7 @@ public abstract class IntrospectedTable {
      * 
      * @return the list of generated Java files for this table
      */
-    public abstract List<GeneratedJavaFile> getGeneratedJavaFiles();
+    public abstract List<GeneratedJavaFile> getGeneratedJavaFiles(String author);
 
     /**
      * This method should return a list of generated XML files related to this

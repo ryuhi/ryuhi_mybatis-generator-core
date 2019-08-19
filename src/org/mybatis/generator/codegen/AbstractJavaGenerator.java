@@ -28,7 +28,7 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.config.PropertyRegistry;
 
 public abstract class AbstractJavaGenerator extends AbstractGenerator {
-    public abstract List<CompilationUnit> getCompilationUnits();
+    public abstract List<CompilationUnit> getCompilationUnits(String author);
 
     public static Method getGetter(Field field) {
         Method method = new Method();

@@ -52,7 +52,7 @@ public class SimpleJavaClientGenerator extends AbstractJavaClientGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits() {
+    public List<CompilationUnit> getCompilationUnits(String author) {
         progressCallback.startTask(getString("Progress.17", //$NON-NLS-1$
                 introspectedTable.getFullyQualifiedTable().toString()));
         CommentGenerator commentGenerator = context.getCommentGenerator();
@@ -61,7 +61,7 @@ public class SimpleJavaClientGenerator extends AbstractJavaClientGenerator {
                 introspectedTable.getMyBatis3JavaMapperType());
         Interface interfaze = new Interface(type);
         interfaze.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(interfaze);
+        commentGenerator.addJavaFileComment(interfaze, author);
 
         String rootInterface = introspectedTable
                 .getTableConfigurationProperty(PropertyRegistry.ANY_ROOT_INTERFACE);
@@ -145,7 +145,7 @@ public class SimpleJavaClientGenerator extends AbstractJavaClientGenerator {
     }
 
     @Override
-    public AbstractXmlGenerator getMatchedXMLGenerator() {
-        return new SimpleXMLMapperGenerator();
+    public AbstractXmlGenerator getMatchedXMLGenerator(String author) {
+        return new SimpleXMLMapperGenerator(author);
     }
 }

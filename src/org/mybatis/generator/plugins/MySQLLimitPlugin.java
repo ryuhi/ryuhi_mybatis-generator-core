@@ -1,4 +1,4 @@
-package com.xxg.mybatis.plugins;
+package org.mybatis.generator.plugins;
 
 import java.util.List;
 

@@ -73,12 +73,12 @@ public class DynamicSqlMapperGenerator extends AbstractJavaClientGenerator {
     }
     
     @Override
-    public List<CompilationUnit> getCompilationUnits() {
+    public List<CompilationUnit> getCompilationUnits(String author) {
         progressCallback.startTask(getString("Progress.17", //$NON-NLS-1$
                 introspectedTable.getFullyQualifiedTable().toString()));
         preCalculate();
         
-        Interface interfaze = createBasicInterface();
+        Interface interfaze = createBasicInterface(author);
 
         TopLevelClass supportClass = getSupportClass();
         String staticImportString = supportClass.getType().getFullyQualifiedNameWithoutTypeParameters() + ".*"; //$NON-NLS-1$
@@ -124,12 +124,12 @@ public class DynamicSqlMapperGenerator extends AbstractJavaClientGenerator {
                 .build();
     }
 
-    private Interface createBasicInterface() {
+    private Interface createBasicInterface(String author) {
         FullyQualifiedJavaType type = new FullyQualifiedJavaType(
                 introspectedTable.getMyBatis3JavaMapperType());
         Interface interfaze = new Interface(type);
         interfaze.setVisibility(JavaVisibility.PUBLIC);
-        context.getCommentGenerator().addJavaFileComment(interfaze);
+        context.getCommentGenerator().addJavaFileComment(interfaze, author);
         interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Mapper")); //$NON-NLS-1$
         interfaze.addAnnotation("@Mapper"); //$NON-NLS-1$
 
@@ -360,7 +360,7 @@ public class DynamicSqlMapperGenerator extends AbstractJavaClientGenerator {
     }
 
     @Override
-    public AbstractXmlGenerator getMatchedXMLGenerator() {
+    public AbstractXmlGenerator getMatchedXMLGenerator(String author) {
         return null;
     }
 }
