@@ -84,7 +84,7 @@ public class Context extends PropertyHolder {
     /** The ending delimiter. */
     private String endingDelimiter = "\""; //$NON-NLS-1$
     
-    @Getterr
+    @Getter
     private Boolean useTextAsNoBlob;
 
     /** The comment generator configuration. */
