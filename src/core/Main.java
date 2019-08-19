@@ -1,3 +1,4 @@
+package core;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
@@ -16,7 +17,7 @@ public class Main  {
 
     public static void main(String[] args) throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException, URISyntaxException {
         List<String> warnings = new ArrayList<String>();
-        File configFile = new File(Main.class.getResource("/generatorConfig.xml").toURI());
+        File configFile = new File(Main.class.getResource("/generatorConfig-starEdu.xml").toURI());
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback shellCallback = new DefaultShellCallback(true);

@@ -447,8 +447,8 @@ public abstract class IntrospectedTable {
         this.context = context;
     }
 
-    public void addColumn(IntrospectedColumn introspectedColumn) {
-        if (introspectedColumn.isBLOBColumn()) {
+    public void addColumn(IntrospectedColumn introspectedColumn, Boolean useTextAsNoBlob) {
+        if (introspectedColumn.isBLOBColumn(useTextAsNoBlob)) {
             blobColumns.add(introspectedColumn);
         } else {
             baseColumns.add(introspectedColumn);

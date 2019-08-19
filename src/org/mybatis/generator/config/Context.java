@@ -83,6 +83,9 @@ public class Context extends PropertyHolder {
 
     /** The ending delimiter. */
     private String endingDelimiter = "\""; //$NON-NLS-1$
+    
+    @Getterr
+    private Boolean useTextAsNoBlob;
 
     /** The comment generator configuration. */
     private CommentGeneratorConfiguration commentGeneratorConfiguration;
@@ -462,6 +465,7 @@ public class Context extends PropertyHolder {
         }
 
         privateAddNewProperty(name, value);
+        privateAddUseTextAsNoBlob(name,value);
     }
 
     /**
@@ -802,6 +806,12 @@ public class Context extends PropertyHolder {
 
         if (PropertyRegistry.USE_PRIMITIVE.equals(name)) {
             usePrimitive = Boolean.valueOf(value);
+        }
+    }
+    
+    public void privateAddUseTextAsNoBlob(String name, String value) {
+        if (PropertyRegistry.USE_TEXT_AS_NO_BLOB.equals(name)) {
+            useTextAsNoBlob = Boolean.valueOf(value);
         }
     }
 }

@@ -54,6 +54,9 @@ import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.logging.Log;
 import org.mybatis.generator.logging.LogFactory;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Jeff Butler
  */
@@ -701,6 +704,7 @@ public class DatabaseIntrospector {
     private List<IntrospectedTable> calculateIntrospectedTables(
             TableConfiguration tc,
             Map<ActualTableName, List<IntrospectedColumn>> columns) throws SQLException {
+    	Boolean useTextAsNoBlob = context.getUseTextAsNoBlob();
         boolean delimitIdentifiers = tc.isDelimitIdentifiers()
                 || stringContainsSpace(tc.getCatalog())
                 || stringContainsSpace(tc.getSchema())
@@ -743,7 +747,7 @@ public class DatabaseIntrospector {
                     .createIntrospectedTable(tc, table, context);
 
             for (IntrospectedColumn introspectedColumn : entry.getValue()) {
-                introspectedTable.addColumn(introspectedColumn);
+                introspectedTable.addColumn(introspectedColumn, useTextAsNoBlob);
             }
 
             calculatePrimaryKey(table, introspectedTable);
