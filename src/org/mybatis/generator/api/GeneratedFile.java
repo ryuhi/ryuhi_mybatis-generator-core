@@ -45,7 +45,7 @@ public abstract class GeneratedFile {
      * 
      * @return Returns the content.
      */
-    public abstract String getFormattedContent();
+    public abstract String getFormattedContent(String str);
 
     /**
      * Get the file name (without any path). Clients should use this method to
@@ -78,7 +78,7 @@ public abstract class GeneratedFile {
      */
     @Override
     public String toString() {
-        return getFormattedContent();
+        return getFormattedContent(null);
     }
 
     /**

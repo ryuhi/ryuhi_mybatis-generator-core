@@ -69,17 +69,19 @@ public class TopLevelClass extends InnerClass implements CompilationUnit {
     }
 
     @Override
-    public String getFormattedContent() {
+    public String getFormattedContent(String str) {
         StringBuilder sb = new StringBuilder();
 
         for (String fileCommentLine : fileCommentLines) {
             sb.append(fileCommentLine);
             newLine(sb);
         }
-
-        if (stringHasValue(getType().getPackageName())) {
+        if (null == str) {
+        	str = getType().getPackageName();
+        }
+        if (stringHasValue(str)) {
             sb.append("package "); //$NON-NLS-1$
-            sb.append(getType().getPackageName());
+            sb.append(str);
             sb.append(';');
             newLine(sb);
             newLine(sb);

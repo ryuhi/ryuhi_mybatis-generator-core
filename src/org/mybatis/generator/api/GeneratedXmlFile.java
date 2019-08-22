@@ -70,7 +70,7 @@ public class GeneratedXmlFile extends GeneratedFile {
      * @see org.mybatis.generator.api.GeneratedFile#getFormattedContent()
      */
     @Override
-    public String getFormattedContent() {
+    public String getFormattedContent(String str) {
         return xmlFormatter.getFormattedContent(document);
     }
 

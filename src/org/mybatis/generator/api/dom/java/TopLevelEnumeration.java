@@ -46,7 +46,7 @@ public class TopLevelEnumeration extends InnerEnum implements CompilationUnit {
     }
 
     @Override
-    public String getFormattedContent() {
+    public String getFormattedContent(String str) {
         StringBuilder sb = new StringBuilder();
 
         for (String fileCommentLine : fileCommentLines) {
@@ -54,10 +54,10 @@ public class TopLevelEnumeration extends InnerEnum implements CompilationUnit {
             newLine(sb);
         }
 
-        if (getType().getPackageName() != null
-                && getType().getPackageName().length() > 0) {
+        if (str != null
+                && str.length() > 0) {
             sb.append("package "); //$NON-NLS-1$
-            sb.append(getType().getPackageName());
+            sb.append(str);
             sb.append(';');
             newLine(sb);
             newLine(sb);

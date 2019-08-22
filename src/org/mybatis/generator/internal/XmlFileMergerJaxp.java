@@ -77,7 +77,7 @@ public class XmlFileMergerJaxp {
             File existingFile) throws ShellException {
 
         try {
-            return getMergedSource(new InputSource(new StringReader(generatedXmlFile.getFormattedContent())),
+            return getMergedSource(new InputSource(new StringReader(generatedXmlFile.getFormattedContent(null))),
                 new InputSource(new InputStreamReader(new FileInputStream(existingFile), "UTF-8")), //$NON-NLS-1$
                 existingFile.getName());
         } catch (IOException e) {

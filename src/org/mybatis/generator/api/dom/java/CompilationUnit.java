@@ -26,7 +26,7 @@ import java.util.Set;
  */
 public interface CompilationUnit {
 
-    String getFormattedContent();
+    String getFormattedContent(String str);
 
     Set<FullyQualifiedJavaType> getImportedTypes();
 

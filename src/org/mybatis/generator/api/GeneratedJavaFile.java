@@ -72,11 +72,12 @@ public class GeneratedJavaFile extends GeneratedFile {
     }
 
     /* (non-Javadoc)
+     * @param str
      * @see org.mybatis.generator.api.GeneratedFile#getFormattedContent()
      */
     @Override
-    public String getFormattedContent() {
-        return javaFormatter.getFormattedContent(compilationUnit);
+    public String getFormattedContent(String str) {
+        return javaFormatter.getFormattedContent(compilationUnit, str);
     }
 
     /* (non-Javadoc)

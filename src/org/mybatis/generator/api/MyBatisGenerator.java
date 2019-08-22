@@ -297,37 +297,42 @@ public class MyBatisGenerator {
             throws InterruptedException, IOException {
         File targetFile;
         String source;
-        try {
-            File directory = shellCallback.getDirectory(gjf
-                    .getTargetProject(), gjf.getTargetPackage());
-            targetFile = new File(directory, gjf.getFileName());
-            if (targetFile.exists()) {
-                if (shellCallback.isMergeSupported()) {
-                    source = shellCallback.mergeJavaFile(gjf
-                            .getFormattedContent(), targetFile,
-                            MergeConstants.OLD_ELEMENT_TAGS,
-                            gjf.getFileEncoding());
-                } else if (shellCallback.isOverwriteEnabled()) {
-                    source = gjf.getFormattedContent();
-                    warnings.add(getString("Warning.11", //$NON-NLS-1$
-                            targetFile.getAbsolutePath()));
-                } else {
-                    source = gjf.getFormattedContent();
-                    targetFile = getUniqueFileName(directory, gjf
-                            .getFileName());
-                    warnings.add(getString(
-                            "Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
-                }
-            } else {
-                source = gjf.getFormattedContent();
-            }
-
-            callback.checkCancel();
-            callback.startTask(getString(
-                    "Progress.15", targetFile.getName())); //$NON-NLS-1$
-            writeFile(targetFile, source, gjf.getFileEncoding());
-        } catch (ShellException e) {
-            warnings.add(e.getMessage());
+        String targetPackage = gjf.getTargetPackage();
+        String[] packageArr = targetPackage.split(",");
+        for (String str : packageArr) {
+        	str = str.trim();
+	        try {
+	            File directory = shellCallback.getDirectory(gjf
+	                    .getTargetProject(), str);
+	            targetFile = new File(directory, gjf.getFileName());
+	            if (targetFile.exists()) {
+	                if (shellCallback.isMergeSupported()) {
+	                    source = shellCallback.mergeJavaFile(gjf
+	                            .getFormattedContent(str), targetFile,
+	                            MergeConstants.OLD_ELEMENT_TAGS,
+	                            gjf.getFileEncoding());
+	                } else if (shellCallback.isOverwriteEnabled()) {
+	                    source = gjf.getFormattedContent(str);
+	                    warnings.add(getString("Warning.11", //$NON-NLS-1$
+	                            targetFile.getAbsolutePath()));
+	                } else {
+	                    source = gjf.getFormattedContent(str);
+	                    targetFile = getUniqueFileName(directory, gjf
+	                            .getFileName());
+	                    warnings.add(getString(
+	                            "Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
+	                }
+	            } else {
+	                source = gjf.getFormattedContent(str);
+	            }
+	
+	            callback.checkCancel();
+	            callback.startTask(getString(
+	                    "Progress.15", targetFile.getName())); //$NON-NLS-1$
+	            writeFile(targetFile, source, gjf.getFileEncoding());
+	        } catch (ShellException e) {
+	            warnings.add(e.getMessage());
+	        }
         }
     }
 
@@ -344,18 +349,18 @@ public class MyBatisGenerator {
                     source = XmlFileMergerJaxp.getMergedSource(gxf,
                             targetFile);
                 } else if (shellCallback.isOverwriteEnabled()) {
-                    source = gxf.getFormattedContent();
+                    source = gxf.getFormattedContent(null);
                     warnings.add(getString("Warning.11", //$NON-NLS-1$
                             targetFile.getAbsolutePath()));
                 } else {
-                    source = gxf.getFormattedContent();
+                    source = gxf.getFormattedContent(null);
                     targetFile = getUniqueFileName(directory, gxf
                             .getFileName());
                     warnings.add(getString(
                             "Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
                 }
             } else {
-                source = gxf.getFormattedContent();
+                source = gxf.getFormattedContent(null);
             }
 
             callback.checkCancel();

@@ -62,13 +62,13 @@ public class Interface extends InnerInterface implements CompilationUnit {
     }
 
     @Override
-    public String getFormattedContent() {
+    public String getFormattedContent(String str) {
 
-        return getFormattedContent(0, this);
+        return getFormattedContent(0, this, str);
     }
 
     @Override
-    public String getFormattedContent(int indentLevel, CompilationUnit compilationUnit) {
+    public String getFormattedContent(int indentLevel, CompilationUnit compilationUnit, String str) {
         StringBuilder sb = new StringBuilder();
 
         for (String commentLine : fileCommentLines) {
@@ -76,9 +76,9 @@ public class Interface extends InnerInterface implements CompilationUnit {
             newLine(sb);
         }
 
-        if (stringHasValue(getType().getPackageName())) {
+        if (stringHasValue(str)) {
             sb.append("package "); //$NON-NLS-1$
-            sb.append(getType().getPackageName());
+            sb.append(str);
             sb.append(';');
             newLine(sb);
             newLine(sb);
@@ -105,7 +105,7 @@ public class Interface extends InnerInterface implements CompilationUnit {
             newLine(sb);
         }
 
-        sb.append(super.getFormattedContent(0, this));
+        sb.append(super.getFormattedContent(0, this, str));
 
         return sb.toString();
     }

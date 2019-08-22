@@ -30,8 +30,8 @@ public class DefaultJavaFormatter implements JavaFormatter {
     protected Context context;
 
     @Override
-    public String getFormattedContent(CompilationUnit compilationUnit) {
-        return compilationUnit.getFormattedContent();
+    public String getFormattedContent(CompilationUnit compilationUnit, String str) {
+        return compilationUnit.getFormattedContent(str);
     }
 
     @Override

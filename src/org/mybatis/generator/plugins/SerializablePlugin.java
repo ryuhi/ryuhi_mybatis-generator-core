@@ -103,7 +103,7 @@ public class SerializablePlugin extends PluginAdapter {
 
             Field field = new Field();
             field.setFinal(true);
-            String code = topLevelClass.getFormattedContent();
+            String code = topLevelClass.getFormattedContent(null);
             long svuid = 1L;
         	JavaStringCompiler compiler = new JavaStringCompiler();
         	String shortName = topLevelClass.getType().getShortName()+".java";

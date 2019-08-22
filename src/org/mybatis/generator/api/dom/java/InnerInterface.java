@@ -88,7 +88,7 @@ public class InnerInterface extends JavaElement {
      * @param compilationUnit the compilation unit
      * @return the formatted content
      */
-    public String getFormattedContent(int indentLevel, CompilationUnit compilationUnit) {
+    public String getFormattedContent(int indentLevel, CompilationUnit compilationUnit, String str) {
         StringBuilder sb = new StringBuilder();
 
         addFormattedJavadoc(sb, indentLevel);
@@ -154,7 +154,7 @@ public class InnerInterface extends JavaElement {
         while (iiIter.hasNext()) {
             newLine(sb);
             InnerInterface innerInterface = iiIter.next();
-            sb.append(innerInterface.getFormattedContent(indentLevel, compilationUnit));
+            sb.append(innerInterface.getFormattedContent(indentLevel, compilationUnit, str));
             if (iiIter.hasNext()) {
                 newLine(sb);
             }
