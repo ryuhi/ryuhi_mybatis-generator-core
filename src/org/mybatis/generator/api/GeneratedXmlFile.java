@@ -71,7 +71,7 @@ public class GeneratedXmlFile extends GeneratedFile {
      */
     @Override
     public String getFormattedContent(String str) {
-        return xmlFormatter.getFormattedContent(document);
+        return xmlFormatter.getFormattedContent(document, str);
     }
 
     /**

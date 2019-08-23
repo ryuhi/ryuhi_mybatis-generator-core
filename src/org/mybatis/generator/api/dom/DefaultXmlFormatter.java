@@ -30,8 +30,8 @@ public class DefaultXmlFormatter implements XmlFormatter {
     protected Context context;
 
     @Override
-    public String getFormattedContent(Document document) {
-        return document.getFormattedContent();
+    public String getFormattedContent(Document document, String str) {
+        return document.getFormattedContent(str);
     }
 
     @Override

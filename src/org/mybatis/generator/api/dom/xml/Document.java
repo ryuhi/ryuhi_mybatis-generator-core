@@ -96,7 +96,7 @@ public class Document {
      *
      * @return the formatted content
      */
-    public String getFormattedContent() {
+    public String getFormattedContent(String str) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"); //$NON-NLS-1$
@@ -113,7 +113,7 @@ public class Document {
         }
 
         OutputUtilities.newLine(sb);
-        sb.append(rootElement.getFormattedContent(0));
+        sb.append(rootElement.getFormattedContent(0, str));
 
         return sb.toString();
     }

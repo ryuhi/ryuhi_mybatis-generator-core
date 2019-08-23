@@ -351,20 +351,20 @@ public class MyBatisGenerator {
 	            if (targetFile.exists()) {
 	                if (gxf.isMergeable()) {
 	                    source = XmlFileMergerJaxp.getMergedSource(gxf,
-	                            targetFile);
+	                            targetFile, pa);
 	                } else if (shellCallback.isOverwriteEnabled()) {
-	                    source = gxf.getFormattedContent(null);
+	                    source = gxf.getFormattedContent(pa);
 	                    warnings.add(getString("Warning.11", //$NON-NLS-1$
 	                            targetFile.getAbsolutePath()));
 	                } else {
-	                    source = gxf.getFormattedContent(null);
+	                    source = gxf.getFormattedContent(pa);
 	                    targetFile = getUniqueFileName(directory, gxf
 	                            .getFileName());
 	                    warnings.add(getString(
 	                            "Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
 	                }
 	            } else {
-	                source = gxf.getFormattedContent(null);
+	                source = gxf.getFormattedContent(pa);
 	            }
 	
 	            callback.checkCancel();

@@ -21,5 +21,5 @@ public abstract class Element {
         super();
     }
 
-    public abstract String getFormattedContent(int indentLevel);
+    public abstract String getFormattedContent(int indentLevel, String str);
 }

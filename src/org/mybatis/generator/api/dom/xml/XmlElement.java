@@ -128,7 +128,7 @@ public class XmlElement extends Element {
      * @see org.mybatis.generator.api.dom.xml.Element#getFormattedContent(int)
      */
     @Override
-    public String getFormattedContent(int indentLevel) {
+    public String getFormattedContent(int indentLevel, String str) {
         StringBuilder sb = new StringBuilder();
 
         OutputUtilities.xmlIndent(sb, indentLevel);
@@ -145,7 +145,7 @@ public class XmlElement extends Element {
             sb.append(">"); //$NON-NLS-1$
             for (Element element : elements) {
                 OutputUtilities.newLine(sb);
-                sb.append(element.getFormattedContent(indentLevel + 1));
+                sb.append(element.getFormattedContent(indentLevel + 1, str));
             }
             OutputUtilities.newLine(sb);
             OutputUtilities.xmlIndent(sb, indentLevel);

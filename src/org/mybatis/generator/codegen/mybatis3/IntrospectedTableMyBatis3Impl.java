@@ -23,6 +23,7 @@ import org.mybatis.generator.api.GeneratedXmlFile;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.ProgressCallback;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
+import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.codegen.AbstractGenerator;
 import org.mybatis.generator.codegen.AbstractJavaClientGenerator;
@@ -204,12 +205,27 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
 
         if (xmlMapperGenerator != null) {
             Document document = xmlMapperGenerator.getDocument();
-            GeneratedXmlFile gxf = new GeneratedXmlFile(document,
-                    getMyBatis3XmlMapperFileName(), getMyBatis3XmlMapperPackage(),
-                    context.getSqlMapGeneratorConfiguration().getTargetProject(),
-                    true, context.getXmlFormatter());
-            if (context.getPlugins().sqlMapGenerated(gxf, this)) {
-                answer.add(gxf);
+
+            String packageName = getMyBatis3XmlMapperPackage();
+            String fileName = getMyBatis3XmlMapperFileName();
+            String project = context.getSqlMapGeneratorConfiguration().getTargetProject();
+            String[] packageArr = packageName.split(",");
+            for (String pa : packageArr) {
+            	pa = pa.trim();
+                List<Attribute> attributes = document.getRootElement().getAttributes();
+                for (Attribute attb : attributes) {
+                	if ("namespace".equals(attb.getName())) {
+                		Attribute newattb = new Attribute(attb.getName(), pa + "." + fileName.replaceAll(".xml", ""));
+                		attributes.remove(attb);
+                		document.getRootElement().addAttribute(newattb);
+                		break;
+                	}
+                }
+                
+	            GeneratedXmlFile gxf = new GeneratedXmlFile(document,fileName, pa, project, true, context.getXmlFormatter());
+	            if (context.getPlugins().sqlMapGenerated(gxf, this)) {
+	                answer.add(gxf);
+	            }
             }
         }
 

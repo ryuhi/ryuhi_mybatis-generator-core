@@ -42,7 +42,7 @@ public class TextElement extends Element {
      * @see org.mybatis.generator.api.dom.xml.Element#getFormattedContent(int)
      */
     @Override
-    public String getFormattedContent(int indentLevel) {
+    public String getFormattedContent(int indentLevel, String str) {
         StringBuilder sb = new StringBuilder();
         OutputUtilities.xmlIndent(sb, indentLevel);
         sb.append(content);
