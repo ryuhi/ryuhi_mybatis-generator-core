@@ -47,7 +47,7 @@ public class RecordWithBLOBsGenerator extends AbstractJavaGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits(String author) {
+    public List<CompilationUnit> getCompilationUnits(String author, String str) {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString(
                 "Progress.9", table.toString())); //$NON-NLS-1$
@@ -57,7 +57,7 @@ public class RecordWithBLOBsGenerator extends AbstractJavaGenerator {
         TopLevelClass topLevelClass = new TopLevelClass(introspectedTable
                 .getRecordWithBLOBsType());
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(topLevelClass, author);
+        commentGenerator.addJavaFileComment(topLevelClass, author, str);
 
         if (introspectedTable.getRules().generateBaseRecordClass()) {
             topLevelClass.setSuperClass(introspectedTable.getBaseRecordType());

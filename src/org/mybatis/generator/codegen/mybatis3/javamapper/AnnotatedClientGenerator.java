@@ -163,7 +163,7 @@ public class AnnotatedClientGenerator extends JavaMapperGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getExtraCompilationUnits(String author) {
+    public List<CompilationUnit> getExtraCompilationUnits(String author, String str) {
         boolean useLegacyBuilder = false;
 
         String prop = context.getJavaClientGeneratorConfiguration()
@@ -176,7 +176,7 @@ public class AnnotatedClientGenerator extends JavaMapperGenerator {
         sqlProviderGenerator.setIntrospectedTable(introspectedTable);
         sqlProviderGenerator.setProgressCallback(progressCallback);
         sqlProviderGenerator.setWarnings(warnings);
-        return sqlProviderGenerator.getCompilationUnits(author);
+        return sqlProviderGenerator.getCompilationUnits(author, str);
     }
 
     @Override

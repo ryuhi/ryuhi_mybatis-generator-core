@@ -61,7 +61,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits(String author) {
+    public List<CompilationUnit> getCompilationUnits(String author, String str) {
         progressCallback.startTask(getString("Progress.17", //$NON-NLS-1$
                 introspectedTable.getFullyQualifiedTable().toString()));
         CommentGenerator commentGenerator = context.getCommentGenerator();
@@ -70,7 +70,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
                 introspectedTable.getMyBatis3JavaMapperType());
         Interface interfaze = new Interface(type);
         interfaze.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(interfaze, author);
+        commentGenerator.addJavaFileComment(interfaze, author, str);
 
         String rootInterface = introspectedTable
                 .getTableConfigurationProperty(PropertyRegistry.ANY_ROOT_INTERFACE);
@@ -107,7 +107,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
             answer.add(interfaze);
         }
 
-        List<CompilationUnit> extraCompilationUnits = getExtraCompilationUnits(author);
+        List<CompilationUnit> extraCompilationUnits = getExtraCompilationUnits(author, str);
         if (extraCompilationUnits != null) {
             answer.addAll(extraCompilationUnits);
         }
@@ -224,7 +224,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         methodGenerator.addInterfaceElements(interfaze);
     }
 
-    public List<CompilationUnit> getExtraCompilationUnits(String author) {
+    public List<CompilationUnit> getExtraCompilationUnits(String author, String str) {
         return null;
     }
 

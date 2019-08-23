@@ -177,7 +177,7 @@ public interface CommentGenerator {
      * @param compilationUnit
      *            the compilation unit
      */
-    void addJavaFileComment(CompilationUnit compilationUnit, String author);
+    void addJavaFileComment(CompilationUnit compilationUnit, String author, String str);
 
     /**
      * This method should add a suitable comment as a child element of the specified xmlElement to warn users that the

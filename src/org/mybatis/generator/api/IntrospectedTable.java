@@ -998,7 +998,7 @@ public abstract class IntrospectedTable {
      * 
      * @return the list of generated Java files for this table
      */
-    public abstract List<GeneratedJavaFile> getGeneratedJavaFiles(String author);
+    public abstract List<GeneratedJavaFile> getGeneratedJavaFiles(String author, String str);
 
     /**
      * This method should return a list of generated XML files related to this

@@ -49,7 +49,7 @@ public class PrimaryKeyGenerator extends AbstractJavaGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits(String author) {
+    public List<CompilationUnit> getCompilationUnits(String author, String str) {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString(
                 "Progress.7", table.toString())); //$NON-NLS-1$
@@ -59,7 +59,7 @@ public class PrimaryKeyGenerator extends AbstractJavaGenerator {
         TopLevelClass topLevelClass = new TopLevelClass(introspectedTable
                 .getPrimaryKeyType());
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(topLevelClass, author);
+        commentGenerator.addJavaFileComment(topLevelClass, author, str);
 
         String rootClass = getRootClass();
         if (rootClass != null) {

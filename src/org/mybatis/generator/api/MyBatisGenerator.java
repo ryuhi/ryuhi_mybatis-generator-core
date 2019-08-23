@@ -340,35 +340,40 @@ public class MyBatisGenerator {
             throws InterruptedException, IOException {
         File targetFile;
         String source;
-        try {
-            File directory = shellCallback.getDirectory(gxf
-                    .getTargetProject(), gxf.getTargetPackage());
-            targetFile = new File(directory, gxf.getFileName());
-            if (targetFile.exists()) {
-                if (gxf.isMergeable()) {
-                    source = XmlFileMergerJaxp.getMergedSource(gxf,
-                            targetFile);
-                } else if (shellCallback.isOverwriteEnabled()) {
-                    source = gxf.getFormattedContent(null);
-                    warnings.add(getString("Warning.11", //$NON-NLS-1$
-                            targetFile.getAbsolutePath()));
-                } else {
-                    source = gxf.getFormattedContent(null);
-                    targetFile = getUniqueFileName(directory, gxf
-                            .getFileName());
-                    warnings.add(getString(
-                            "Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
-                }
-            } else {
-                source = gxf.getFormattedContent(null);
-            }
-
-            callback.checkCancel();
-            callback.startTask(getString(
-                    "Progress.15", targetFile.getName())); //$NON-NLS-1$
-            writeFile(targetFile, source, "UTF-8"); //$NON-NLS-1$
-        } catch (ShellException e) {
-            warnings.add(e.getMessage());
+        String targetPackage = gxf.getTargetPackage();
+        String[] packageArr = targetPackage.split(",");
+        for (String pa : packageArr) {
+        	pa = pa.trim();
+	        try {
+	            File directory = shellCallback.getDirectory(gxf
+	                    .getTargetProject(), pa);
+	            targetFile = new File(directory, gxf.getFileName());
+	            if (targetFile.exists()) {
+	                if (gxf.isMergeable()) {
+	                    source = XmlFileMergerJaxp.getMergedSource(gxf,
+	                            targetFile);
+	                } else if (shellCallback.isOverwriteEnabled()) {
+	                    source = gxf.getFormattedContent(null);
+	                    warnings.add(getString("Warning.11", //$NON-NLS-1$
+	                            targetFile.getAbsolutePath()));
+	                } else {
+	                    source = gxf.getFormattedContent(null);
+	                    targetFile = getUniqueFileName(directory, gxf
+	                            .getFileName());
+	                    warnings.add(getString(
+	                            "Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
+	                }
+	            } else {
+	                source = gxf.getFormattedContent(null);
+	            }
+	
+	            callback.checkCancel();
+	            callback.startTask(getString(
+	                    "Progress.15", targetFile.getName())); //$NON-NLS-1$
+	            writeFile(targetFile, source, "UTF-8"); //$NON-NLS-1$
+	        } catch (ShellException e) {
+	            warnings.add(e.getMessage());
+	        }
         }
     }
 

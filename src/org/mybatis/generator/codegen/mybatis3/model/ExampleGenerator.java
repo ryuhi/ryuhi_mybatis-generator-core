@@ -51,7 +51,7 @@ public class ExampleGenerator extends AbstractJavaGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits(String author) {
+    public List<CompilationUnit> getCompilationUnits(String author, String str) {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString(
                 "Progress.6", table.toString())); //$NON-NLS-1$
@@ -61,7 +61,7 @@ public class ExampleGenerator extends AbstractJavaGenerator {
                 introspectedTable.getExampleType());
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(topLevelClass, author);
+        commentGenerator.addJavaFileComment(topLevelClass, author, str);
 
         // add default constructor
         Method method = new Method();

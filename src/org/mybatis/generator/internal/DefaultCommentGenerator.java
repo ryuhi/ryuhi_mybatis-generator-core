@@ -62,10 +62,16 @@ public class DefaultCommentGenerator implements CommentGenerator {
     }
 
     @Override
-    public void addJavaFileComment(CompilationUnit compilationUnit, String author) {
+    public void addJavaFileComment(CompilationUnit compilationUnit, String author, String str) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ");
         compilationUnit.addFileCommentLine("/**");
-        compilationUnit.addFileCommentLine("  * " + compilationUnit.getType().getFullyQualifiedName() + ".java");
+        String name = null;
+        if (null == str) {
+        	name = compilationUnit.getType().getFullyQualifiedName();
+        } else {
+        	name = str + "." +compilationUnit.getType().getShortName();
+        }
+        compilationUnit.addFileCommentLine("  * " + name + ".java");
         compilationUnit.addFileCommentLine("  * ");
         compilationUnit.addFileCommentLine("  * @author " + author);
         compilationUnit.addFileCommentLine("  * @date " + LocalDateTime.now().format(formatter));
@@ -274,8 +280,6 @@ public class DefaultCommentGenerator implements CommentGenerator {
         if (suppressAllComments) {
             return;
         }
-
-        StringBuilder sb = new StringBuilder();
 
         method.addJavaDocLine("/**"); //$NON-NLS-1$
         String methodName = method.getName();

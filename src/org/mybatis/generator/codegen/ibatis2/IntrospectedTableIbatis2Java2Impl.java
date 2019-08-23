@@ -144,12 +144,12 @@ public class IntrospectedTableIbatis2Java2Impl extends IntrospectedTable {
     }
 
     @Override
-    public List<GeneratedJavaFile> getGeneratedJavaFiles(String author) {
+    public List<GeneratedJavaFile> getGeneratedJavaFiles(String author, String str) {
         List<GeneratedJavaFile> answer = new ArrayList<GeneratedJavaFile>();
 
         for (AbstractJavaGenerator javaGenerator : javaModelGenerators) {
             List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits(author);
+                    .getCompilationUnits(author, str);
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
                         context.getJavaModelGeneratorConfiguration()
@@ -162,7 +162,7 @@ public class IntrospectedTableIbatis2Java2Impl extends IntrospectedTable {
 
         for (AbstractJavaGenerator javaGenerator : daoGenerators) {
             List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits(author);
+                    .getCompilationUnits(author, str);
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
                         context.getJavaClientGeneratorConfiguration()

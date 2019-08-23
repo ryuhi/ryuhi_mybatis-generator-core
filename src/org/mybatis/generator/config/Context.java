@@ -735,7 +735,7 @@ public class Context extends PropertyHolder {
                 introspectedTable.initialize();
                 introspectedTable.calculateGenerators(warnings, callback, author);
                 generatedJavaFiles.addAll(introspectedTable
-                        .getGeneratedJavaFiles(author));
+                        .getGeneratedJavaFiles(author, null));
                 generatedXmlFiles.addAll(introspectedTable
                         .getGeneratedXmlFiles());
 

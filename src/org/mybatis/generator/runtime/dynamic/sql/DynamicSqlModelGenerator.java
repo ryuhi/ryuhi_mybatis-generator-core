@@ -51,7 +51,7 @@ public class DynamicSqlModelGenerator extends AbstractJavaGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits(String author) {
+    public List<CompilationUnit> getCompilationUnits(String author, String str) {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString("Progress.8", table.toString())); //$NON-NLS-1$
         Plugin plugins = context.getPlugins();
@@ -61,7 +61,7 @@ public class DynamicSqlModelGenerator extends AbstractJavaGenerator {
                 introspectedTable.getBaseRecordType());
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(topLevelClass, author);
+        commentGenerator.addJavaFileComment(topLevelClass, author, str);
 
         FullyQualifiedJavaType superClass = getSuperClass();
         if (superClass != null) {

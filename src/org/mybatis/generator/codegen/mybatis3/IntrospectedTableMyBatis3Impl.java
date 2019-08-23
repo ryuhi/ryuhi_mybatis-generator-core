@@ -169,12 +169,12 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
     }
 
     @Override
-    public List<GeneratedJavaFile> getGeneratedJavaFiles(String author) {
+    public List<GeneratedJavaFile> getGeneratedJavaFiles(String author, String str) {
         List<GeneratedJavaFile> answer = new ArrayList<GeneratedJavaFile>();
 
         for (AbstractJavaGenerator javaGenerator : javaModelGenerators) {
             List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits(author);
+                    .getCompilationUnits(author, str);
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
                         context.getJavaModelGeneratorConfiguration()
@@ -184,19 +184,16 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
                 answer.add(gjf);
             }
         }
-
-        for (AbstractJavaGenerator javaGenerator : clientGenerators) {
-            List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits(author);
-            for (CompilationUnit compilationUnit : compilationUnits) {
-                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
-                        context.getJavaClientGeneratorConfiguration()
-                                .getTargetProject(),
-                                context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
-                                context.getJavaFormatter());
-                answer.add(gjf);
-            }
+        if (null == str) {
+        	String targetPackage = context.getJavaClientGeneratorConfiguration().getTargetPackage();
+        	String[] targetArr = targetPackage.split(",");
+        	for(String tp : targetArr) {
+        		privateClientMethod(author, tp, answer);
+        	}
+        } else {
+        	privateClientMethod(author, str, answer);
         }
+
 
         return answer;
     }
@@ -241,5 +238,21 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
         } else {
             return javaClientGenerator.requiresXMLGenerator();
         }
+    }
+    
+    private List<GeneratedJavaFile> privateClientMethod(String author, String str, List<GeneratedJavaFile> answer) {
+        for (AbstractJavaGenerator javaGenerator : clientGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator
+                    .getCompilationUnits(author, str);
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaClientGeneratorConfiguration()
+                                .getTargetProject(),
+                                context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                                context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+        return answer;
     }
 }

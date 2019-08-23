@@ -75,7 +75,9 @@ public class Interface extends InnerInterface implements CompilationUnit {
             sb.append(commentLine);
             newLine(sb);
         }
-
+        if (null == str) {
+        	str = getType().getPackageName();
+        }
         if (stringHasValue(str)) {
             sb.append("package "); //$NON-NLS-1$
             sb.append(str);

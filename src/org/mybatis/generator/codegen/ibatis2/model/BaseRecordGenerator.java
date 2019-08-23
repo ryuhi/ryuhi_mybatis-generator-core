@@ -49,7 +49,7 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
     }
 
     @Override
-    public List<CompilationUnit> getCompilationUnits(String author) {
+    public List<CompilationUnit> getCompilationUnits(String author, String str) {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString(
                 "Progress.8", table.toString())); //$NON-NLS-1$
@@ -59,7 +59,7 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
         TopLevelClass topLevelClass = new TopLevelClass(introspectedTable
                 .getBaseRecordType());
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-        commentGenerator.addJavaFileComment(topLevelClass, author);
+        commentGenerator.addJavaFileComment(topLevelClass, author, str);
 
         FullyQualifiedJavaType superClass = getSuperClass();
         if (superClass != null) {
